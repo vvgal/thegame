@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/nullstyle.css">
     <link rel="stylesheet" href="css/style.min.css">
-    <title>The game</title>
+    <title>The Game</title>
 </head>
 <body>
     <div class="container">
-        <canvas width="0" height="0" class="canvas" id="canvas">Ваш браузер не поддерживает игру</canvas>
         <div class="hp" id="HP">3</div>
+        <div class="kills" id="kills">0</div>
+        <canvas width="0" height="0" class="canvas" id="canvas">Ваш браузер не поддерживает игру</canvas>
+        <div class="start-window start-window_active" id="start-window">
+            <div class="start-window__content">
+                WASD - to move <br>
+                Arrows - to attack <br>
+                Escape - to pause <br>
+                Left Click - to start
+            </div>
+        </div>
+        <div class="game-over" id="game-over">
+            <div class="game-over__content">
+                Game over! <br>
+                Your score: <span id="score">0</span> <br>
+                Reload page to play again
+            </div>
+        </div>
     </div>
 
     <script src="js/modules/keys.js"></script>

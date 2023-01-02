@@ -20,9 +20,11 @@ class Char {
 		this.loaded = false;
         this.speed = 3;
         this.hp = 3;
+        this.kills = 0;
+        this.hitBox = getArea(this.x, this.y, this.width, this.height);
         this.immortal = false;
-        this.hited = function() {
-            this.hp -= 1;
+        this.hited = function(strength) {
+            this.hp -= strength;
             HP.innerHTML = this.hp;
         };
 
@@ -53,11 +55,15 @@ class Char {
 
 class Enemy {
 	constructor(image, x, y) {
+        this.name = 'enemy';
 		this.x = x;
 		this.y = y;
         this.height = 60;
         this.width = 48;
-        this.hitBox = getArea(this.x, this.y, this.width, this.height);
+        this.hp = 1;
+        this.strength = 1;
+        this.hited = false;
+        this.speed = 2;
         this.dead = false;
 		this.loaded = false;
 
@@ -71,16 +77,54 @@ class Enemy {
 
 	step(direction) {
 		if(direction === "up") {
-            this.y -= 1
+            this.y -= this.speed * Math.random();
         }
         if(direction === "down") {
-            this.y += 1
+            this.y += this.speed * Math.random();
         }
         if(direction === "left") {
-            this.x -= 1
+            this.x -= this.speed * Math.random() * 1.41;
         }
         if(direction === "right") {
-            this.x += 1
+            this.x += this.speed * Math.random() * 1.41;
+        }
+    }
+}
+
+class Minotaur {
+	constructor(image, x, y) {
+        this.name = 'minotaur';
+		this.x = x;
+		this.y = y;
+        this.height = 182;
+        this.width = 109;
+        this.speed = 1;
+        this.hp = 10;
+        this.strength = 3;
+        this.hited = false;
+        this.dead = false;
+		this.loaded = false;
+
+		this.image = new Image();
+        this.image.src = image; 
+		
+		var obj = this;
+
+		this.image.addEventListener("load", function () { obj.loaded = true; });
+    };
+
+	step(direction) {
+		if(direction === "up") {
+            this.y -= this.speed * Math.random();
+        }
+        if(direction === "down") {
+            this.y += this.speed * Math.random();
+        }
+        if(direction === "left") {
+            this.x -= this.speed * Math.random() * 1.41;
+        }
+        if(direction === "right") {
+            this.x += this.speed * Math.random() * 1.41;
         }
     }
 }
@@ -144,4 +188,23 @@ class Shot {
             this.range -= this.speed;
         }
     }
+}
+
+class Heart {
+	constructor(image, x, y) {
+		this.x = x;
+		this.y = y;
+        this.height = 16;
+        this.width = 16;
+        this.pickArea = getArea(this.x, this.y, this.width, this.height);
+        this.done = false;
+		this.loaded = false;
+
+		this.image = new Image();
+        this.image.src = image; 
+		
+		let obj = this;
+
+		this.image.addEventListener("load", function () { obj.loaded = true; });
+    };
 }
